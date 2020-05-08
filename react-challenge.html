@@ -28,14 +28,17 @@
         }
 
         nextMood = () => {
-          if(currentMood === moods.length - 1){
-            this.setState({ currentMood: currentMood = 0 })
+          //the key should be this.state.
+          if(this.state.currentMood === this.state.moods.length - 1){
+            //you use the name alone on the key at setState and the value is just a value
+            this.setState({ currentMood: 0  })
           } else {
-            this.setState({ currentMood: currentMood + 1 })
+            this.setState({ currentMood: this.state.currentMood + 1 })
           }
         }
 
         setThisMood = () => {
+          //I added this.state before every moods
           this.setState({ setMood: this.state.moods[this.state.currentMood] })
         }
 
@@ -47,6 +50,7 @@
                 next={ this.nextMood }
                 setThisMood={ this.setThisMood }
                 set={ this.state.setMood }
+
               />
             </div>
           )
@@ -66,25 +70,21 @@
       class MoodMeter extends React.Component{
         render(){
           return(
+          //I added <div></div>
+            <div>
               <h3>Mood Options:</h3>
               <p style={{fontSize: "40px"}}>{ this.props.moodOptions }</p>
-              <button onClick={ }>Click Here For Next Mood Option</button>
+              <button onClick={this.props.next}>Click Here For Next Mood Option</button>
               <br />
               <br />
               <h3>Save your mood here!</h3>
               <button onClick={ this.props.setThisMood }>Yup, this is me right now.</button>
               <h3>My mood:</h3>
               <p style={{fontSize: "40px"}}>{ this.props.set }</p>
+            </div>
           )
         }
       }
-
-
-
-
-
-
-
       // No need to change anything below this line
       const domContainer = document.querySelector('#react-container')
       ReactDOM.render(<App />, domContainer)
